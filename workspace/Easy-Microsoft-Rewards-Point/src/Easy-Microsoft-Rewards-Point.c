@@ -33,8 +33,6 @@ int main(void) {
 		   fscanf(fp, "%d", &temp);
 	}
 	fclose(fp);
-
-	//FILE *fp2;
 	fp = fopen("time.txt", "w"); // write mode
 	if (fp == NULL)
 		{
@@ -48,9 +46,6 @@ int main(void) {
 	} else {
 		punti();
 	}
-
-
-	//printf("now: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 	return EXIT_SUCCESS;
 }
 
