@@ -6,5 +6,9 @@ Once the program has started, check if it has already started the same day. If s
 
 To automate the process 100%, it is advisable to insert the file into the folder "__C: Programdata Microsoft Windows Start Menu Programs Startup__".
 
-To automatically move files to the startup folder, you can use the batch file "__Automove__".
+To make the program work, you need to start the batch file as an administrator to install and move all the files.
+  
+  ## RELEASE
+  
+ ![Download]()
 
