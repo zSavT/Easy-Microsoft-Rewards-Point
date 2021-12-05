@@ -10,5 +10,5 @@ To make the program work, you need to start the batch file as an administrator t
   
   ## RELEASE
   
- ![Download]()
+ ![Download](https://github.com/zSavT/Easy-Microsoft-Rewards-Point/releases/tag/Final)
 
