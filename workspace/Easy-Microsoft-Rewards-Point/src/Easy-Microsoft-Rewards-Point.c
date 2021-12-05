@@ -15,7 +15,6 @@
 
 void punti();
 
-
 int main(void) {
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
