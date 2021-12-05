@@ -2,9 +2,7 @@
  ============================================================================
  Name        : Easy-Microsoft-Rewards-Point.c
  Author      : zSavT
- Version     :
- Copyright   : 
- Description : Hello World in C, Ansi-style
+ Version     : v1.0
  ============================================================================
  */
 
@@ -23,7 +21,7 @@ int main(void) {
 	struct tm tm = *localtime(&t);
 	int temp = 1;
 	FILE *fp;
-	fp = fopen("time.txt", "r"); // read mode
+	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "r"); // read mode
 	if (fp == NULL)
 	{
 	  perror("Error while opening the file.\n");
@@ -33,7 +31,7 @@ int main(void) {
 		   fscanf(fp, "%d", &temp);
 	}
 	fclose(fp);
-	fp = fopen("time.txt", "w"); // write mode
+	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 	if (fp == NULL)
 		{
 		  perror("Error while opening the file.\n");
