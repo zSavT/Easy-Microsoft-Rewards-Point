@@ -86,6 +86,6 @@ void punti() {
 	system("START microsoft-edge:https://www.bing.com/search?q=7");
 	system("START microsoft-edge:https://www.bing.com/search?q=8");
 	system("START microsoft-edge:https://www.bing.com/search?q=9");
-	Sleep(5000);
+	Sleep(10000);
 	system("taskkill /F /IM msedge.exe");
 }
