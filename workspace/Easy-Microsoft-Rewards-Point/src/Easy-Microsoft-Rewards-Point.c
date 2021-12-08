@@ -2,7 +2,7 @@
  ============================================================================
  Name        : Easy-Microsoft-Rewards-Point.c
  Author      : zSavT
- Version     : v1.0
+ Version     : v1.0.1
  ============================================================================
  */
 
@@ -21,26 +21,24 @@ int main(void) {
 	int temp = 1;
 	FILE *fp;
 	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "r"); // read mode
-	if (fp == NULL)
-	{
-	  perror("Error while opening the file.\n");
-	  exit(EXIT_FAILURE);
+	if (fp == NULL) {
+		perror("Error while opening the file.\n");
+		exit(-1);
 	}
-	while(!feof (fp)) {
-		   fscanf(fp, "%d", &temp);
+	while (!feof(fp)) {
+		fscanf(fp, "%d", &temp);
 	}
-	fclose(fp);
-	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
-	if (fp == NULL)
-		{
-		  perror("Error while opening the file.\n");
-		  exit(EXIT_FAILURE);
-		}
-
-	fprintf(fp, "%d", tm.tm_mday);
 	fclose(fp);
 	if (temp >= tm.tm_mday) {
+		return EXIT_SUCCESS;
 	} else {
+		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
+		if (fp == NULL) {
+			perror("Error while opening the file.\n");
+			exit(-2);
+		}
+		fprintf(fp, "%d", tm.tm_mday);
+		fclose(fp);
 		punti();
 	}
 	return EXIT_SUCCESS;
