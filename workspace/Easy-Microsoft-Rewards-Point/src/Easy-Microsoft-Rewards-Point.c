@@ -30,18 +30,23 @@ int main(void) {
 	}
 	fclose(fp);
 	if (temp >= tm.tm_mday) {
-		return EXIT_SUCCESS;
-	} else {
 		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
 			perror("Error while opening the file.\n");
 			exit(-2);
+			return EXIT_SUCCESS;
+		} else {
+			fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
+			if (fp == NULL) {
+				perror("Error while opening the file.\n");
+				exit(-2);
+			}
+			fprintf(fp, "%d", tm.tm_mday);
+			fclose(fp);
+			punti();
 		}
-		fprintf(fp, "%d", tm.tm_mday);
-		fclose(fp);
-		punti();
+		return EXIT_SUCCESS;
 	}
-	return EXIT_SUCCESS;
 }
 
 void punti() {
