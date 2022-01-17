@@ -16,9 +16,11 @@
 void punti();
 
 int main(void) {
+
+	//READ VAL ON FILE TIME.TXT
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
-	int temp = 1;
+	int temp = 1;					//file time
 	FILE *fp;
 	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "r"); // read mode
 	if (fp == NULL) {
@@ -26,25 +28,33 @@ int main(void) {
 		exit(-1);
 	}
 	while (!feof(fp)) {
-		fscanf(fp, "%d", &temp);
+		fscanf(fp, "%d", &temp);			//read val from file
 	}
 	fclose(fp);
-	if (temp >= tm.tm_mday) {
+
+	//CHECK ACTUAL DAY WITH DAY ON FILE
+	if (temp < tm.tm_mday) {
+		punti();
 		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
 			perror("Error while opening the file.\n");
 			exit(-2);
-			return EXIT_SUCCESS;
 		} else {
-			fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
-			if (fp == NULL) {
-				perror("Error while opening the file.\n");
-				exit(-2);
-			}
-			fprintf(fp, "%d", tm.tm_mday);
-			fclose(fp);
-			punti();
+			fprintf(fp, "%d", tm.tm_mday);			//write val on file
 		}
+		fclose(fp);
+		return EXIT_SUCCESS;
+	} else if (temp == tm.tm_mday) {
+		return EXIT_SUCCESS;
+	} else { 											//in case of time.txt is too old
+		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
+		if (fp == NULL) {
+			perror("Error while opening the file.\n");
+			exit(-2);
+		} else {
+			fprintf(fp, "%d", tm.tm_mday);			//write val on file
+		}
+		fclose(fp);
 		return EXIT_SUCCESS;
 	}
 }
@@ -89,3 +99,4 @@ void punti() {
 	Sleep(10000);
 	system("taskkill /F /IM msedge.exe");
 }
+
