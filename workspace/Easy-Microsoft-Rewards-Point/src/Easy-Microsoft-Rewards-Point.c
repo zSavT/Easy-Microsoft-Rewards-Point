@@ -10,10 +10,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <time.h>
+#include <stdlib.h>
 #include <string.h>
 #include <Windows.h>
+#include "randomString.h"
+
 
 void punti();
+
 
 int main(void) {
 
@@ -58,6 +63,8 @@ int main(void) {
 		return EXIT_SUCCESS;
 	}
 }
+
+
 
 void punti() {
 	system("START microsoft-edge:https://www.bing.com/search?q=a");
