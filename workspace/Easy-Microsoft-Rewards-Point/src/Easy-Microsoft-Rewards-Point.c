@@ -40,7 +40,7 @@ int main(void) {
 	}
 	fclose(fp);
 
-	//CHECK ACTUAL DAY WITH DAY ON FILE
+	//CHECK ACTUAL DAY AND MONTH WITH DAY AND MONTH ON FILE
 	i = 0;
 	if (temp[0] < tm.tm_mday && temp[1] < tm.tm_mon + 1) {
 		punti();
@@ -60,6 +60,7 @@ int main(void) {
 		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
 			perror("Error while opening the file.\n");
+			system("PAUSE");
 			exit(-2);
 		} else {
 			fprintf(fp, "%d \n", tm.tm_mday);			//write val on file

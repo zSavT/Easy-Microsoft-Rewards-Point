@@ -19,10 +19,12 @@ int randomValue(){
 	return r;
 }
 
-bool alreadyTaken(int value, bool taken){
+bool alreadyTaken(int value, bool taken) {
 
 	return true;
 }
+
+
 
 
 #endif /* SRC_RANDOMSTRING_H_ */
