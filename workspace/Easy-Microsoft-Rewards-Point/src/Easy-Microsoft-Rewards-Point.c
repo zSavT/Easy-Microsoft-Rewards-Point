@@ -2,7 +2,7 @@
  ============================================================================
  Name        : Easy-Microsoft-Rewards-Point.c
  Author      : zSavT
- Version     : v1.0.2
+ Version     : v1.0.3
  ============================================================================
  */
 
@@ -25,7 +25,8 @@ int main(void) {
 	//READ VAL ON FILE TIME.TXT
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
-	int temp = 1;					//file time
+	int temp[2];					//file time
+	int i = 0;
 	FILE *fp;
 	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "r"); // read mode
 	if (fp == NULL) {
@@ -33,35 +34,42 @@ int main(void) {
 		exit(-1);
 	}
 	while (!feof(fp)) {
-		fscanf(fp, "%d", &temp);			//read val from file
+		fscanf(fp, "%d", &temp[i]);			//read val from file
+		printf("%d\n", temp[i]);
+		i++;
 	}
 	fclose(fp);
 
-	//CHECK ACTUAL DAY WITH DAY ON FILE
-	if (temp < tm.tm_mday) {
+	//CHECK ACTUAL DAY AND MONTH WITH DAY AND MONTH ON FILE
+	i = 0;
+	if (temp[0] < tm.tm_mday && temp[1] < tm.tm_mon + 1) {
 		punti();
 		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
 			perror("Error while opening the file.\n");
 			exit(-2);
 		} else {
-			fprintf(fp, "%d", tm.tm_mday);			//write val on file
+			fprintf(fp, "%d \n", tm.tm_mday);			//write val on file
+			fprintf(fp, "%d", tm.tm_mon + 1);			//write val on file
 		}
 		fclose(fp);
 		return EXIT_SUCCESS;
-	} else if (temp == tm.tm_mday) {
+	} else if (temp[0] == tm.tm_mday && temp[1] == tm.tm_mon) {
 		return EXIT_SUCCESS;
 	} else { 											//in case of time.txt is too old
 		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
 			perror("Error while opening the file.\n");
+			system("PAUSE");
 			exit(-2);
 		} else {
-			fprintf(fp, "%d", tm.tm_mday);			//write val on file
+			fprintf(fp, "%d \n", tm.tm_mday);			//write val on file
+			fprintf(fp, "%d", tm.tm_mon + 1);			//write val on file
 		}
 		fclose(fp);
 		return EXIT_SUCCESS;
 	}
+
 }
 
 
