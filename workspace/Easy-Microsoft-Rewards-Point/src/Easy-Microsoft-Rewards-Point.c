@@ -2,7 +2,7 @@
  ============================================================================
  Name        : Easy-Microsoft-Rewards-Point.c
  Author      : zSavT
- Version     : v1.0.3
+ Version     : v1.0.3.1
  ============================================================================
  */
 
@@ -42,7 +42,7 @@ int main(void) {
 
 	//CHECK ACTUAL DAY AND MONTH WITH DAY AND MONTH ON FILE
 	i = 0;
-	if (temp[0] < tm.tm_mday && temp[1] < tm.tm_mon + 1) {
+	if (temp[0] < tm.tm_mday && temp[1] <= tm.tm_mon + 1) {
 		punti();
 		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
@@ -54,7 +54,7 @@ int main(void) {
 		}
 		fclose(fp);
 		return EXIT_SUCCESS;
-	} else if (temp[0] == tm.tm_mday && temp[1] == tm.tm_mon) {
+	} else if (temp[0] == tm.tm_mday && temp[1] == tm.tm_mon + 1) {
 		return EXIT_SUCCESS;
 	} else { 											//in case of time.txt is too old
 		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
@@ -63,7 +63,7 @@ int main(void) {
 			system("PAUSE");
 			exit(-2);
 		} else {
-			fprintf(fp, "%d \n", tm.tm_mday);			//write val on file
+			fprintf(fp, "%d\n", tm.tm_mday);			//write val on file
 			fprintf(fp, "%d", tm.tm_mon + 1);			//write val on file
 		}
 		fclose(fp);
