@@ -42,22 +42,14 @@ int main(void) {
 
 	//CHECK ACTUAL DAY AND MONTH WITH DAY AND MONTH ON FILE
 	i = 0;
-	if (temp[0] < tm.tm_mday && temp[1] <= tm.tm_mon + 1) {
+	if(temp[1] < tm.tm_mon + 1) {
 		punti();
-		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
-		if (fp == NULL) {
-			perror("Error while opening the file.\n");
-			exit(-2);
-		} else {
-			fprintf(fp, "%d \n", tm.tm_mday);			//write val on file
-			fprintf(fp, "%d", tm.tm_mon + 1);			//write val on file
-		}
-		fclose(fp);
+	} else if ( (temp[1] == tm.tm_mon + 1) && (temp[0] < tm.tm_mday) ) {
+		punti();
+	} else if (temp[0] == tm.tm_mday) {
 		return EXIT_SUCCESS;
-	} else if (temp[0] == tm.tm_mday && temp[1] == tm.tm_mon + 1) {
-		return EXIT_SUCCESS;
-	} else { 											//in case of time.txt is too old
-		fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
+	}
+	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
 			perror("Error while opening the file.\n");
 			system("PAUSE");
@@ -68,8 +60,6 @@ int main(void) {
 		}
 		fclose(fp);
 		return EXIT_SUCCESS;
-	}
-
 }
 
 
