@@ -8,7 +8,11 @@ To automate the process 100%, it is advisable to insert the file into the folder
 
 To make the program work, you need to start the batch file as an administrator to install and move all the files.
   
- I realized this project to learn and for fun.
+I realized this project to learn and for fun.
+
+## NOTE
+
+Searches are done via _Bing_ on _Edge_, make sure you have _Edge_ working with your Microsoft account active.
   
   ## RELEASE
   
