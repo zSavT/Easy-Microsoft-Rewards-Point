@@ -63,7 +63,6 @@ int main(void) {
 }
 
 
-
 void punti() {
 	system("START microsoft-edge:https://www.bing.com/search?q=a");
 	system("START microsoft-edge:https://www.bing.com/search?q=b");

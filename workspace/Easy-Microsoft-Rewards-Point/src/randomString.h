@@ -7,22 +7,35 @@
 
 #ifndef SRC_RANDOMSTRING_H_
 #define SRC_RANDOMSTRING_H_
-#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #define MAX_DICTIONARY 30
 
-int randomValue();
-bool alreadyTaken(int value, bool taken);
+char random_char(int index);
+char* createRandomString();
 
-int randomValue(){
-	srand(time(NULL));   // Initialization, should only be called once.
-	int r = rand() % MAX_DICTIONARY;      // Returns a pseudo-random integer between 0 and RAND_MAX.
-	return r;
+
+char random_char(int index) 
+{
+	char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	return charset[index];
 }
 
-bool alreadyTaken(int value, bool taken) {
-
-	return true;
+char* createRandomString()
+{
+	srand(time(NULL));
+	dim = rand() % MAX_DICTIONARY;
+	char str[dim];
+	int i, index;
+	for (i = 0; i < dim - 1; i++) {
+		index = rand() % 62;
+		str[i] = random_char(index);
+	}
+	str[i] = '\0';
 }
+
+
 
 
 
