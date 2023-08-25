@@ -3,8 +3,14 @@
 	<name>Easy-Microsoft-Rewards-Point</name>
 	<comment></comment>
 	<projects>
+		<project>Easy-Microsoft-Rewards-Point</project>
 	</projects>
 	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.autotools.core.genmakebuilderV2</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 		<buildCommand>
 			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
 			<triggers>clean,full,incremental,</triggers>
@@ -22,6 +28,7 @@
 		<nature>org.eclipse.cdt.core.cnature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.autotools.core.autotoolsNatureV2</nature>
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 	</natures>
 </projectDescription>

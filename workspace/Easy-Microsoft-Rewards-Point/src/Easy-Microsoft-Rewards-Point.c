@@ -2,7 +2,7 @@
  ============================================================================
  Name        : Easy-Microsoft-Rewards-Point.c
  Author      : zSavT
- Version     : v1.0.3.1
+ Version     : v1.0.3.2
  ============================================================================
  */
 
@@ -15,6 +15,7 @@
 #include <string.h>
 #include <Windows.h>
 #include "randomString.h"
+#define NUMBER_SEARCH 36
 
 
 void punti();
@@ -26,6 +27,7 @@ int main(void) {
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 	int temp[2];					//file time
+	printf("%d", tm.tm_mon);
 	int i = 0;
 	FILE *fp;
 	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "r"); // read mode
@@ -33,6 +35,7 @@ int main(void) {
 		perror("Error while opening the file.\n");
 		exit(-1);
 	}
+	printf("Day and month saved on file.\n");
 	while (!feof(fp)) {
 		fscanf(fp, "%d", &temp[i]);			//read val from file
 		printf("%d\n", temp[i]);
@@ -55,53 +58,29 @@ int main(void) {
 			system("PAUSE");
 			exit(-2);
 		} else {
-			fprintf(fp, "%d\n", tm.tm_mday);			//write val on file
-			fprintf(fp, "%d", tm.tm_mon + 1);			//write val on file
+			tm = *localtime(&t);						//reset val
+			fprintf(fp, "%d\n", tm.tm_mday);			//write day on file
+			fprintf(fp, "%d", tm.tm_mon + 1);			//write mouth on file
 		}
 		fclose(fp);
+
 		return EXIT_SUCCESS;
 }
 
-
-
+/*
+ * starting from the generated string, the method opens an edge page with the search of the generated string
+ */
 void punti() {
-	system("START microsoft-edge:https://www.bing.com/search?q=a");
-	system("START microsoft-edge:https://www.bing.com/search?q=b");
-	system("START microsoft-edge:https://www.bing.com/search?q=c");
-	system("START microsoft-edge:https://www.bing.com/search?q=d");
-	system("START microsoft-edge:https://www.bing.com/search?q=e");
-	system("START microsoft-edge:https://www.bing.com/search?q=f");
-	system("START microsoft-edge:https://www.bing.com/search?q=g");
-	system("START microsoft-edge:https://www.bing.com/search?q=h");
-	system("START microsoft-edge:https://www.bing.com/search?q=i");
-	system("START microsoft-edge:https://www.bing.com/search?q=l");
-	system("START microsoft-edge:https://www.bing.com/search?q=m");
-	system("START microsoft-edge:https://www.bing.com/search?q=n");
-	system("START microsoft-edge:https://www.bing.com/search?q=o");
-	system("START microsoft-edge:https://www.bing.com/search?q=p");
-	system("START microsoft-edge:https://www.bing.com/search?q=q");
-	system("START microsoft-edge:https://www.bing.com/search?q=r");
-	system("START microsoft-edge:https://www.bing.com/search?q=s");
-	system("START microsoft-edge:https://www.bing.com/search?q=t");
-	system("START microsoft-edge:https://www.bing.com/search?q=u");
-	system("START microsoft-edge:https://www.bing.com/search?q=v");
-	system("START microsoft-edge:https://www.bing.com/search?q=z");
-	system("START microsoft-edge:https://www.bing.com/search?q=w");
-	system("START microsoft-edge:https://www.bing.com/search?q=y");
-	system("START microsoft-edge:https://www.bing.com/search?q=j");
-	system("START microsoft-edge:https://www.bing.com/search?q=k");
-	system("START microsoft-edge:https://www.bing.com/search?q=x");
-	system("START microsoft-edge:https://www.bing.com/search?q=0");
-	system("START microsoft-edge:https://www.bing.com/search?q=1");
-	system("START microsoft-edge:https://www.bing.com/search?q=2");
-	system("START microsoft-edge:https://www.bing.com/search?q=3");
-	system("START microsoft-edge:https://www.bing.com/search?q=4");
-	system("START microsoft-edge:https://www.bing.com/search?q=5");
-	system("START microsoft-edge:https://www.bing.com/search?q=6");
-	system("START microsoft-edge:https://www.bing.com/search?q=7");
-	system("START microsoft-edge:https://www.bing.com/search?q=8");
-	system("START microsoft-edge:https://www.bing.com/search?q=9");
-	Sleep(10000);
+	for (int i = 0; i<NUMBER_SEARCH; i++)
+	{
+		char* str = createRandomString();
+		char openCommand[] = "START microsoft-edge:https://www.bing.com/search?q=";
+		strcat(openCommand,str);
+		system(openCommand);
+		Sleep(1000);	//pause to make the search more natural and to avoid problems with string generation
+		free(str);
+	}
+	Sleep(10000);		//give enough time for potato computer to load everything
 	system("taskkill /F /IM msedge.exe");
 }
 
