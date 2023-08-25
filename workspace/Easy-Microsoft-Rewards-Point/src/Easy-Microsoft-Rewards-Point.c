@@ -15,6 +15,7 @@
 #include <string.h>
 #include <Windows.h>
 #include "randomString.h"
+
 #define NUMBER_SEARCH 36
 
 
