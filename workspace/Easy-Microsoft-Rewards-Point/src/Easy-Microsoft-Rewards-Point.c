@@ -2,7 +2,7 @@
  ============================================================================
  Name        : Easy-Microsoft-Rewards-Point.c
  Author      : zSavT
- Version     : v1.0.3.2
+ Version     : v1.1
  ============================================================================
  */
 
@@ -27,8 +27,7 @@ int main(void) {
 	//READ VAL ON FILE TIME.TXT
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
-	int temp[2];					//file time
-	printf("%d", tm.tm_mon);
+	int temp[3];					//file time
 	int i = 0;
 	FILE *fp;
 	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "r"); // read mode
@@ -36,7 +35,7 @@ int main(void) {
 		perror("Error while opening the file.\n");
 		exit(-1);
 	}
-	printf("Day and month saved on file.\n");
+	printf("Day, month and year saved on file.\n");
 	while (!feof(fp)) {
 		fscanf(fp, "%d", &temp[i]);			//read val from file
 		printf("%d\n", temp[i]);
@@ -44,11 +43,11 @@ int main(void) {
 	}
 	fclose(fp);
 
-	//CHECK ACTUAL DAY AND MONTH WITH DAY AND MONTH ON FILE
+	//CHECK ACTUAL DAY MONTH YEAR WITH DAY MONTH YEAR ON FILE
 	i = 0;
-	if(temp[1] < tm.tm_mon + 1) {
+	if(temp[2] < tm.tm_year + 1900) {
 		punti();
-	} else if ( (temp[1] == tm.tm_mon + 1) && (temp[0] < tm.tm_mday) ) {
+	} else if ( (temp[1] == tm.tm_mon + 1) && (temp[0] < tm.tm_mday) && temp[2] < tm.tm_year + 1900) {
 		punti();
 	} else if (temp[0] == tm.tm_mday) {
 		return EXIT_SUCCESS;
@@ -61,7 +60,8 @@ int main(void) {
 		} else {
 			tm = *localtime(&t);						//reset val
 			fprintf(fp, "%d\n", tm.tm_mday);			//write day on file
-			fprintf(fp, "%d", tm.tm_mon + 1);			//write mouth on file
+			fprintf(fp, "%d\n", tm.tm_mon + 1);			//write mouth on file
+			fprintf(fp, "%d", tm.tm_year + 1900);		//write year on file
 		}
 		fclose(fp);
 
