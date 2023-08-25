@@ -25,14 +25,15 @@ char random_char(int index)
 char* createRandomString()
 {
 	srand(time(NULL));
-	dim = rand() % MAX_DICTIONARY;
-	char str[dim];
+	int dim = rand() % MAX_DICTIONARY;
+	char *str = malloc(dim * sizeof(char));
 	int i, index;
 	for (i = 0; i < dim - 1; i++) {
 		index = rand() % 62;
 		str[i] = random_char(index);
 	}
 	str[i] = '\0';
+	return str;
 }
 
 
