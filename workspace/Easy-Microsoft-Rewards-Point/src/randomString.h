@@ -11,21 +11,27 @@
 #include <stdlib.h>
 #include <time.h>
 #define MAX_DICTIONARY 30
+#define MIN_STR_LENGHT 2
 
 char random_char(int index);
 char* createRandomString();
 
-
+/*
+ * returns a char at the index passed in input
+ */
 char random_char(int index) 
 {
 	char charset[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	return charset[index];
 }
 
+/*
+ * generates a random string with maximum length MAX_DICTIONARY and minimum MIN_STR_LENGHT
+ */
 char* createRandomString()
 {
 	srand(time(NULL));
-	int dim = rand() % MAX_DICTIONARY;
+	int dim =  MIN_STR_LENGHT + rand() % (MAX_DICTIONARY - MIN_STR_LENGHT);
 	char *str = malloc(dim * sizeof(char));
 	int i, index;
 	for (i = 0; i < dim - 1; i++) {
