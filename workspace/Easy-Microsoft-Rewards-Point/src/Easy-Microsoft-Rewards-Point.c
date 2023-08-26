@@ -43,6 +43,7 @@ int main(void) {
 	}
 	fclose(fp);
 
+
 	//CHECK ACTUAL DAY MONTH YEAR WITH DAY MONTH YEAR ON FILE
 	i = 0;
 	if(temp[2] < tm.tm_year + 1900) {
