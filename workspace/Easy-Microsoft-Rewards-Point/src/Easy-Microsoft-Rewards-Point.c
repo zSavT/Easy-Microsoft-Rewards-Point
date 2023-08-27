@@ -46,13 +46,17 @@ int main(void) {
 
 	//CHECK ACTUAL DAY MONTH YEAR WITH DAY MONTH YEAR ON FILE
 	i = 0;
-	if(temp[2] < tm.tm_year + 1900) {
-		punti();
-	} else if ( (temp[1] == tm.tm_mon + 1) && (temp[0] < tm.tm_mday) && temp[2] < tm.tm_year + 1900) {
-		punti();
-	} else if (temp[0] == tm.tm_mday) {
+	if(temp[2] == tm.tm_year + 1900 && temp[0] == tm.tm_mday && temp[1] == tm.tm_mon + 1 ) {
 		return EXIT_SUCCESS;
+	} else if(temp[0] == tm.tm_mday && temp[1] == tm.tm_mon + 1 && temp[2] < tm.tm_year + 1900) {
+			punti();
+	} else if (temp[0] == tm.tm_mday && temp[1] < tm.tm_mon + 1 && temp[2] <= tm.tm_year + 1900) {
+			punti();
+	} else if (temp[0] < tm.tm_mday && temp[1] <= tm.tm_mon + 1 && temp[2] <= tm.tm_year + 1900) {
+			punti();
 	}
+
+
 	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
 			perror("Error while opening the file.\n");
@@ -64,9 +68,10 @@ int main(void) {
 			fprintf(fp, "%d\n", tm.tm_mon + 1);			//write mouth on file
 			fprintf(fp, "%d", tm.tm_year + 1900);		//write year on file
 		}
-		fclose(fp);
+	fclose(fp);
 
-		return EXIT_SUCCESS;
+
+	return EXIT_SUCCESS;
 }
 
 /*
