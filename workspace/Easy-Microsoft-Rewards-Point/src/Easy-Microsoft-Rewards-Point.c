@@ -52,10 +52,9 @@ int main(void) {
 			punti();
 	} else if (temp[0] == tm.tm_mday && temp[1] < tm.tm_mon + 1 && temp[2] <= tm.tm_year + 1900) {
 			punti();
-	} else if (temp[0] < tm.tm_mday && temp[1] <= tm.tm_mon + 1 && temp[2] <= tm.tm_year + 1900) {
+	} else if (temp[0] > tm.tm_mday && temp[1] < tm.tm_mon + 1 && temp[2] <= tm.tm_year + 1900) {
 			punti();
 	}
-
 
 	fp = fopen("C:/EasyMicrosoftPoint/time.txt", "w"); // write mode
 		if (fp == NULL) {
