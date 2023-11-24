@@ -2,7 +2,7 @@
  ============================================================================
  Name        : Easy-Microsoft-Rewards-Point.c
  Author      : zSavT
- Version     : v1.1.1
+ Version     : v1.2
  ============================================================================
  */
 
@@ -20,6 +20,7 @@
 
 void punti();
 bool isEmpty(int i);
+char* concatenateStrings(const char* string1, const char* string2, const char* string3);
 
 int main(void) {
 
@@ -88,7 +89,10 @@ int main(void) {
 		fclose(fp);
 	}
 
+
 	return EXIT_SUCCESS;
+
+
 }
 
 /*
@@ -98,10 +102,11 @@ void punti() {
 	for (int i = 0; i < NUMBER_SEARCH; i++) {
 		char *str = createRandomString();
 		char openCommand[] =
-				"START microsoft-edge:https://www.bing.com/search?q=";
-		strcat(openCommand, str);
-		system(openCommand);
-		Sleep(5500);//pause to make the search more natural and to avoid problems with string generation
+				"START microsoft-edge:\"https://www.bing.com/search?q=";
+		char flags[] = "&form=QBRE\"";
+		char* finalComand = concatenateStrings(openCommand, str, flags);
+		system(finalComand);
+		Sleep(2500);//pause to make the search more natural and to avoid problems with string generation
 		free(str);
 	}
 	Sleep(10000);	//give enough time for potato computer to load everything
@@ -113,5 +118,26 @@ bool isEmpty(int i) {
 		return FALSE;
 	else
 		return TRUE;
+}
+
+char* concatenateStrings(const char* string1, const char* string2, const char* string3) {
+
+    size_t totalLength = strlen(string1) + strlen(string2) + strlen(string3) + 1; // Calculate the total length of the strings
+
+
+    char* result = (char*)malloc(totalLength); // Allocate memory for the result string
+
+
+    if (result == NULL) {	// Check if memory allocation was successful
+        perror("Error during memory allocation");
+        exit(EXIT_FAILURE);
+    }
+
+    // Copy the strings into the result string
+    strcpy(result, string1);
+    strcat(result, string2);
+    strcat(result, string3);
+
+    return result;
 }
 
