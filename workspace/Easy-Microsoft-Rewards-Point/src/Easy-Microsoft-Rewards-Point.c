@@ -14,7 +14,7 @@
 #include <Windows.h>
 #include "randomString.h"
 
-#define NUMBER_SEARCH 36
+#define NUMBER_SEARCH 30
 #define FILE_PATH "C:/EasyMicrosoftPoint/time.txt"
 
 void punti();
@@ -22,9 +22,9 @@ bool isEmpty();
 char* concatenateStrings(const char* string1, const char* string2, const char* string3);
 void writeDateToFile(const char* filePath);
 void readDateFromFile(const char* filePath, int temp[]);
+const char* getRandomString(const char* stringArray[], int numStrings);
 
 int main(void) {
-
 	time_t t = time(NULL);
     struct tm tm = *localtime(&t);
     int temp[3];  // file time
@@ -46,12 +46,20 @@ int main(void) {
 
     return EXIT_SUCCESS;
 }
+
 /*
  * starting from the generated string, the method opens an edge page with the search of the generated string
- */
+*/
 void punti() {
+        const char* stringArray[] = {"weather today", "weather tomorrow", "how to prepare a lasagna", "how to prepare a pizza", "how to prepare a hotdog", "best soccer team", "how to fix pc errors",
+    "how many languages exist","how many nations exist", "How to tie a tie", "Healthy breakfast recipes", "Best budget smartphones", "Weather forecast for Rome", "Weather forecast for LA", "Learn to play guitar online", 
+    "Quick dinner recipes", "Home workout routines", "Latest technology trends", "How to start a blog", "Travel destinations 2023", "Job opportunities near me", "DIY home decor ideas", "Movie release schedule", "How to meditate for beginners", 
+    "Top fashion trends", "Best productivity apps", "Car maintenance tips", "Popular podcast recommendations", "Financial planning for beginners", "Learn a new language online", "Upcoming concerts near me", "Healthy lunch ideas", "Home gardening tips", 
+    "DIY skincare routines", "Investing for beginners", "Virtual team-building activities", "Online learning platforms comparison", "Latest science discoveries", "Popular video games pc", "How to make pizza at home", "Effective time management techniques",
+     "Easy dessert recipes", "Job interview tips", "Online dating advice", "Best mystery novels", "How to start a YouTube channel", "Home office setup ideas", "Travel hacks for America", "Popular workout playlists", "Budget travel tips", "How to make money online", 
+     "DIY home organization", "Healthy snacks for weight loss", "Latest smartphone reviews", "Digital photography tips", "How to write a resume", "Popular online multiplayer games", "Home remedies for stress relief", "Learn to code for free", "Learn to code C++ for free"};
 	for (int i = 0; i < NUMBER_SEARCH; i++) {
-		char *str = createRandomString();
+		char *str = getRandomString(stringArray, (int)(sizeof(stringArray) / sizeof(stringArray[0])));
 		char openCommand[] =
 				"START microsoft-edge:\"https://www.bing.com/search?q=";
 		char flags[] = "&form=QBRE\"";
@@ -136,3 +144,55 @@ void readDateFromFile(const char* filePath, int temp[]) {
     fclose(fp);
 }
 
+/*
+*   Function to generate a random string from a pre-configured array
+*/ 
+const char* getRandomString(const char* stringArray[], int numStrings) {
+    static const char** usedStrings = NULL;
+    static int usedStringsCount = 0;
+
+    // If all strings have been used, reset the state
+    if (usedStringsCount == numStrings) {
+        free(usedStrings);
+        usedStrings = NULL;
+        usedStringsCount = 0;
+    }
+
+    // Initialize the random number generator with the current time
+    srand((unsigned int)time(NULL));
+
+    // If there are no used strings, create a temporary array
+    if (usedStrings == NULL) {
+        usedStrings = (const char**)malloc(numStrings * sizeof(const char*));
+        memcpy(usedStrings, stringArray, numStrings * sizeof(const char*));
+    }
+
+    // Choose a random string from the unused ones
+    int randomIndex = rand() % (numStrings - usedStringsCount);
+    const char* newString = usedStrings[randomIndex];
+
+    // Remove the used string from the temporary array
+    usedStrings[randomIndex] = usedStrings[numStrings - usedStringsCount - 1];
+    usedStringsCount++;
+
+    return newString;
+}
+
+/*
+ * starting from the generated string, the method opens an edge page with the search of the generated string
+//old
+void punti() {
+	for (int i = 0; i < NUMBER_SEARCH; i++) {
+		char *str = createRandomString();
+		char openCommand[] =
+				"START microsoft-edge:\"https://www.bing.com/search?q=";
+		char flags[] = "&form=QBRE\"";
+		char* finalComand = concatenateStrings(openCommand, str, flags);
+		system(finalComand);
+		Sleep(2500);//pause to make the search more natural and to avoid problems with string generation
+		free(str);
+	}
+	Sleep(10000);	//give enough time for potato computer to load everything
+	system("taskkill /F /IM msedge.exe");
+}
+*/
