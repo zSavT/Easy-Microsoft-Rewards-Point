@@ -24,6 +24,7 @@ void writeDateToFile(const char* filePath);
 void readDateFromFile(const char* filePath, int temp[]);
 const char* getRandomString(const char* stringArray[], int numStrings);
 
+
 int main(void) {
 	time_t t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -51,25 +52,27 @@ int main(void) {
  * starting from the generated string, the method opens an edge page with the search of the generated string
 */
 void punti() {
-        const char* stringArray[] = {"weather today", "weather tomorrow", "how to prepare a lasagna", "how to prepare a pizza", "how to prepare a hotdog", "best soccer team", "how to fix pc errors",
-    "how many languages exist","how many nations exist", "How to tie a tie", "Healthy breakfast recipes", "Best budget smartphones", "Weather forecast for Rome", "Weather forecast for LA", "Learn to play guitar online", 
-    "Quick dinner recipes", "Home workout routines", "Latest technology trends", "How to start a blog", "Travel destinations 2023", "Job opportunities near me", "DIY home decor ideas", "Movie release schedule", "How to meditate for beginners", 
-    "Top fashion trends", "Best productivity apps", "Car maintenance tips", "Popular podcast recommendations", "Financial planning for beginners", "Learn a new language online", "Upcoming concerts near me", "Healthy lunch ideas", "Home gardening tips", 
-    "DIY skincare routines", "Investing for beginners", "Virtual team-building activities", "Online learning platforms comparison", "Latest science discoveries", "Popular video games pc", "How to make pizza at home", "Effective time management techniques",
-     "Easy dessert recipes", "Job interview tips", "Online dating advice", "Best mystery novels", "How to start a YouTube channel", "Home office setup ideas", "Travel hacks for America", "Popular workout playlists", "Budget travel tips", "How to make money online", 
-     "DIY home organization", "Healthy snacks for weight loss", "Latest smartphone reviews", "Digital photography tips", "How to write a resume", "Popular online multiplayer games", "Home remedies for stress relief", "Learn to code for free", "Learn to code C++ for free"};
+        const char* stringArray[] = {"weather+today","weather+tomorrow","how+to+prepare+a+lasagna","how+to+prepare+a+pizza","how+to+prepare+a+hotdog","best+soccer+team","how+to+fix+pc+errors",
+        		"how+many+languages+exist","how+many+nations+exist","How+to+tie+a+tie","Healthy+breakfast+recipes","Best+budget+smartphones","Weather+forecast+for+Rome","Weather+forecast+for+LA","Learn+to+play+guitar+online",
+        		"Quick+dinner+recipes","Home+workout+routines","Latest+technology+trends","How+to+start+a+blog","Travel+destinations+2023","Job+opportunities+near+me","DIY+home+decor+ideas","Movie+release+schedule","How+to+meditate+for+beginners",
+        		"Top+fashion+trends","Best+productivity+apps","Car+maintenance+tips","Popular+podcast+recommendations","Financial+planning+for+beginners","Learn+a+new+language+online","Upcoming+concerts+near+me","Healthy+lunch+ideas","Home+gardening+tips",
+        		"DIY+skincare+routines","Investing+for+beginners","Virtual+team-building+activities","Online+learning+platforms+comparison","Latest+science+discoveries","Popular+video+games+pc","How+to+make+pizza+at+home","Effective+time+management+techniques",
+        		"Easy+dessert+recipes","Job+interview+tips","Online+dating+advice","Best+mystery+novels","How+to+start+a+YouTube+channel","Home+office+setup+ideas","Travel+hacks+for+America","Popular+workout+playlists","Budget+travel+tips","How+to+make+money+online",
+        		"DIY+home+organization","Healthy+snacks+for+weight+loss","Latest+smartphone+reviews","Digital+photography+tips","How+to+write+a+resume","Popular+online+multiplayer+games","Home+remedies+for+stress+relief","Learn+to+code+for+free","Learn+to+code+C+++for+free"};
 	for (int i = 0; i < NUMBER_SEARCH; i++) {
 		char *str = getRandomString(stringArray, (int)(sizeof(stringArray) / sizeof(stringArray[0])));
 		char openCommand[] =
 				"START microsoft-edge:\"https://www.bing.com/search?q=";
-		char flags[] = "&form=QBRE\"";
+		char flags[] = "&form=QBRE&sp=-1&ghc=2&lq=0&pq=d&sc=11-1&sk=\"";
 		char* finalComand = concatenateStrings(openCommand, str, flags);
+
 		system(finalComand);
-		Sleep(2500);//pause to make the search more natural and to avoid problems with string generation
+		Sleep(5000);//pause to make the search more natural and to avoid problems with string generation
+		system("taskkill /F /IM msedge.exe");
 		free(str);
 	}
 	Sleep(10000);	//give enough time for potato computer to load everything
-	system("taskkill /F /IM msedge.exe");
+	system("taskkill /F /IM msedgee.exe");
 }
 
 /*
