@@ -72,7 +72,7 @@ void punti() {
 		free(str);
 	}
 	Sleep(10000);	//give enough time for potato computer to load everything
-	system("taskkill /F /IM msedgee.exe");
+	system("taskkill /F /IM msedge.exe");
 }
 
 /*
